@@ -1,0 +1,71 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+
+\title{Description of data set}
+\author{Zafarali Ahmed}
+\date{September 2015}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+The data set is a collection of $16,000$ articles extracted from the archives on the on-line news website The Verge (\texttt{http://theverge.com}). The website covers technology, science, entertainment and business. 
+
+Features from the page were extracted using a custom web crawler. We used the in-built python module \texttt{requests} 2.7.0 coupled with popular open source module \texttt{BeautifulSoup} 4.3.2 (\texttt{http://www.crummy.com/software/BeautifulSoup/}) for parsing HTML. 
+
+Gender detection was conducted on the first name of the author using \texttt{sexmachine} 0.1.1 (\texttt{https://github.com/ferhatelmas/sexmachine/}), where outputs 'male' and 'mostly male' and 'female' and 'mostly female' were mapped to 'male' and 'female' respectively. 
+
+Sentiment analysis was conducted on the 'title', 'meta description' and 'article' using publicly available Mashape API whose implementation details are found on \texttt{http://text-processing.com/docs/faq.html}. It uses a \emph{hierarchial classification} technique combining two Naive Bayes classifiers, one for objectivity and another for subjectivity. Objective text is labelled as neutral, while subjective text is labelled as positive or negative. Each of the labels come with a probability value which is ultimately used in our data set.
+
+We extracted social media engagement information using official APIs provided by Twitter, Facebook and LinkedIn. Twitter and LinkedIn return basic share counts, while Facebook returns detailed breakdowns of engagement metrics like number of comments and likes, in addition to number of shares.
+
+The final data set has the following features (numerical values that failed to extract are given a default value of $-1$):
+
+\begin{enumerate}
+\item \texttt{\textbf{url}}: The URL of the article, this is a non-predictive feature.
+\item \texttt{\textbf{title\_text}}: The title of the article.
+\item \texttt{\textbf{title\_number\_of\_words}}: The number of words in the title.
+\item \texttt{\textbf{title\_average\_word\_lengths}}: The average length of words in the title.
+\item \texttt{\textbf{probability\_title\_sentiment\_positive}}: The probability that the title is positive.
+\item \texttt{\textbf{probability\_title\_sentiment\_negative}}: The probability that the title is negative.
+\item \texttt{\textbf{probability\_title\_sentiment\_neutral}}: The probability that the title is neutral.
+\item \texttt{\textbf{author}}: The author of the article.
+\item \texttt{\textbf{is\_andy}}: True if the first name of the author is neither male nor female.
+\item \texttt{\textbf{is\_male}}: True if the first name of the author is \emph{male} or \emph{mostly male}.
+\item \texttt{\textbf{is\_female}}: True if the first name of the author is \emph{female} or \emph{mostly female}.
+\item \texttt{\textbf{time\_string}}: The time string of the article.
+\item \texttt{\textbf{is\_weekday}}: True if the article was published on a weekday.
+\item \texttt{\textbf{is\_weekend}}: TO BE REMOVED.
+\item \texttt{\textbf{is\_morning}}: True if the article was published before $12$PM
+\item \texttt{\textbf{is\_afternoon}}: True if the article was published between $12$PM and $6$PM
+\item \texttt{\textbf{is\_night}}: True if the article was published after $6$PM
+\item \texttt{\textbf{meta\_description}}: The text snippet summarising the article that appears when sharing on social media.
+\item \texttt{\textbf{probability\_meta\_sentiment\_positive}}: The probability that the meta description is positive.
+\item \texttt{\textbf{probability\_meta\_sentiment\_negative}}: The probability that the meta description is negative.
+\item \texttt{\textbf{probability\_meta\_sentiment\_neutral}}: The probability that the meta description is neutral.
+\item \texttt{\textbf{twitter\_shares}}: The number of times the article was shared on Twitter.
+\item \texttt{\textbf{linkedin\_shares}}: The number of times the article was shared on LinkedIn.
+\item \texttt{\textbf{facebook\_shares}}: The number of times the article was shared on Facebook.
+\item \texttt{\textbf{facebook\_comments}}: The number of comments the article has received on Facebook.
+\item \texttt{\textbf{facebook\_likes}}: The number of likes the article has received on Facebook.
+\item \texttt{\textbf{facebook\_click\_count}}: The total number of clicks the article has received on Facebook.
+\item \texttt{\textbf{facebook\_total\_engagement}}: The total \emph{engagement} count the article has received on Facebook.
+\item \texttt{\textbf{article\_text}}: The main text of the article.
+\item \texttt{\textbf{probability\_article\_sentiment\_positive}}: The probability that the article is positive.
+\item \texttt{\textbf{probability\_article\_sentiment\_negative}}: The probability that the article is negative.
+\item \texttt{\textbf{probability\_article\_sentiment\_neutral}}: The probability that the article is neutral.
+\item \texttt{\textbf{article\_number\_of\_words}}: The number of words in the article.
+\item \texttt{\textbf{article\_average\_word\_lengths}}: The average length of words in the article.
+\item \texttt{\textbf{article\_number\_of\_unique\_words}}: The number of unique words in the article.
+\item \texttt{\textbf{article\_average\_unique\_word\_lengths}}: The average length of unique words in the article.
+\item \texttt{\textbf{number\_of\_videos}}: The number of videos in the article.
+\item \texttt{\textbf{number\_of\_images}}: The number of images in the article.
+\item \texttt{\textbf{labels}}: The classification labels of the article on The Verge.
+\end{enumerate}
+
+
+\end{document}
